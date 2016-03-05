@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * A light-weight plugin for Smallworld.js 
+ */
+
+/**
+* Implement hook_menu().
+*/
+function smallworld_permission() {
+  return array(
+    'administer smallworld' => array(
+      'title' => t('Administer Smallworld configuration'),
+      'description' => t('Setup basic configuration for Smallworld.'),
+    ),
+  );
+}
+
+/**
+* Implement hook_menu().
+*/
+
+function smallworld_menu() {
+
+  $items = array();
+
+  $items['admin/config/media/smallworld'] = array(
+    'title' => 'SmallWorld.js',
+    'description' => 'Configure settings for Smallworld.js module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('smallworld_admin_form'),
+    'access arguments' => array('administer smallworld'),
+    'file' => 'smallworld.admin.inc',
+  );
+
+  return $items;
+
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function smallworld_libraries_info() {
+  $libraries['smallworld'] = array(
+    'name' => 'Smallworld plugin',
+    'vendor url' => 'http://mikefowler.me/smallworld.js/',
+    'download url' => 'https://github.com/jackmoore/colorbox/archive/1.x.zip',
+    'version arguments' => array(
+      'file' => 'jquery.colorbox-min.js',
+      'pattern' => '@(?i:Colorbox)\sv?([0-9\.a-z]+)@',
+      'lines' => 5,
+    ),
+    'files' => array(
+      'js' => array(
+        'jquery.colorbox-min.js',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.colorbox-min.js',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.colorbox.js',
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
