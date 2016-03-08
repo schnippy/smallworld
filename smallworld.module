@@ -1,13 +1,29 @@
 <?php
 
 /**
- * @file
- * A light-weight plugin for Smallworld.js 
- */
+* @file
+* A light-weight plugin for Smallworld.js
+* <div class='smallworld' data-country='' data-lat='' data-long=''></div>
+*/
+
+function smallworld_init() {
+
+  libraries_load("smallworld.js");
+  $smallworld_settings = array(
+    "smallworld_water" => variable_get("smallworld_water", "#b3d1ff"),
+    "smallworld_land" => variable_get("smallworld_land", "#fff"),
+    "smallworld_marker_color" => variable_get("smallworld_marker_color", "#333"),
+    "smallworld_marker_size" => variable_get("smallworld_marker_size", 5),
+  );
+
+   drupal_add_js(array("smallworld" => $smallworld_settings, 'setting'));
+
+}
 
 /**
 * Implement hook_menu().
 */
+
 function smallworld_permission() {
   return array(
     'administer smallworld' => array(
@@ -42,35 +58,15 @@ function smallworld_menu() {
  * Implements hook_libraries_info().
  */
 function smallworld_libraries_info() {
-  $libraries['smallworld'] = array(
-    'name' => 'Smallworld plugin',
+
+  $libraries['smallworld.js'] = array(
+    'name' => 'SmallWorld.js',
     'vendor url' => 'http://mikefowler.me/smallworld.js/',
-    'download url' => 'https://github.com/jackmoore/colorbox/archive/1.x.zip',
-    'version arguments' => array(
-      'file' => 'jquery.colorbox-min.js',
-      'pattern' => '@(?i:Colorbox)\sv?([0-9\.a-z]+)@',
-      'lines' => 5,
-    ),
+    'download url' => 'https://github.com/mikefowler/smallworld.js',
+    'version' => '1.0', //no version actually defined in code
     'files' => array(
-      'js' => array(
-        'jquery.colorbox-min.js',
-      ),
-    ),
-    'variants' => array(
-      'minified' => array(
-        'files' => array(
-          'js' => array(
-            'jquery.colorbox-min.js',
-          ),
-        ),
-      ),
-      'source' => array(
-        'files' => array(
-          'js' => array(
-            'jquery.colorbox.js',
-          ),
-        ),
-      ),
+      'js' => array('src/smallworld.js'),
+      'js' => array('src/smallworld.jquery.js'),
     ),
   );
 
