@@ -68,7 +68,7 @@ function smallworld_libraries_info() {
     'version' => '1.0', //no version actually defined in code
     'files' => array(
       'js' => array('src/smallworld.js'),
-      'js' => array('src/smallworld.jquery.js'),
+      //'js' => array('src/smallworld.jquery.js'),
     ),
   );
 

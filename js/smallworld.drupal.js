@@ -2,7 +2,8 @@
 
   Drupal.behaviors.smallworld = {
     attach: function (context, settings) {
-      console.log(Smallworld);
+      var el = document.querySelector('.map');
+      var map = new Smallworld(el, options);
       $.getJSON('/sites/all/libraries/smallworld.js/dist/world.json', function (data) {
         $('.map').smallworld({
           geojson: data,
