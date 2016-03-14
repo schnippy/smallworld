@@ -25,17 +25,16 @@ function smallworld_admin_form($form, &$form_state) {
     $form['smallworld_config_demo'] = array(
         '#markup'=> "
   <style>.map {width: 300px; height: 300px; border:10px solid black;}</style>
-  <div class='map'></div>
+  <div class='smallworld map'></div>
   ",
     );
   }
   else {
-      // Something went wrong. :(
-      // This contains a short status code of what went wrong, such as 'not found'.
-      $error = $library['error'];
-      // This contains a detailed (localized) error message.
-      $error_message = $library['error message'];
-      drupal_set_message(t("smallworld.js @error.", array("@error" => $error_message)), "error");
+    $error = $library['error'];
+
+    // This contains a detailed (localized) error message.
+    $error_message = $library['error message'];
+    drupal_set_message(t("smallworld.js library is not loaded: @error.", array("@error" => $error_message)), "error");
   }
 
   $form['smallworld_water'] = array(

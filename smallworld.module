@@ -6,24 +6,27 @@
 * <div class='smallworld' data-country='' data-lat='' data-long=''></div>
 */
 
+/**
+* Implement hook_menu().
+*/
 function smallworld_init() {
 
   libraries_load("smallworld.js");
   $smallworld_settings = array(
-    "smallworld_water" => variable_get("smallworld_water", "#b3d1ff"),
-    "smallworld_land" => variable_get("smallworld_land", "#fff"),
-    "smallworld_marker_color" => variable_get("smallworld_marker_color", "#333"),
-    "smallworld_marker_size" => variable_get("smallworld_marker_size", 5),
+    "smallworld_water" => check_plain(variable_get("smallworld_water", "#b3d1ff")),
+    "smallworld_land" => check_plain(variable_get("smallworld_land", "#fff")),
+    "smallworld_marker_color" => check_plain(variable_get("smallworld_marker_color", "#333")),
+    "smallworld_marker_size" => check_plain(variable_get("smallworld_marker_size", 5)),
   );
 
-   drupal_add_js(array("smallworld" => $smallworld_settings, 'setting'));
+  drupal_add_js(array('smallworld_drupal' => $smallworld_settings),'setting');
+  drupal_add_js(drupal_get_path('module', "smallworld")."/js/smallworld.drupal.js");
 
 }
 
 /**
-* Implement hook_menu().
+* Implement hook_permission().
 */
-
 function smallworld_permission() {
   return array(
     'administer smallworld' => array(
@@ -36,7 +39,6 @@ function smallworld_permission() {
 /**
 * Implement hook_menu().
 */
-
 function smallworld_menu() {
 
   $items = array();

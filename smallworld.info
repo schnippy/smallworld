@@ -4,5 +4,6 @@ core = 7.x
 php = 5.2.4
 version = 7.x-1.0
 project = smallworld
+configure = admin/config/media/smallworld
 
 dependencies[] = libraries
