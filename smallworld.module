@@ -78,3 +78,18 @@ function smallworld_libraries_info() {
 
   return $libraries;
 }
+
+/**
+ * Implements smallworld_output().
+ */
+function smallworld_output($country = "US") { 
+
+  strtoupper($country); 
+
+  include_once(drupal_get_path("module","smallworld")."/smallworld.data.inc");
+
+  global $smallworld_lookup;
+
+  return "<div class='smallworld map' data-lat='".$smallworld_lookup[$country]["lat"]."' data-long='".$smallworld_lookup[$country]["long"]."'></div>";
+
+} // 
