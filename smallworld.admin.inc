@@ -24,8 +24,14 @@ function smallworld_admin_form($form, &$form_state) {
   if (($library = libraries_load("smallworld.js")) && !empty($library['loaded'])) {
     $form['smallworld_config_demo'] = array(
         '#markup'=> "
-  <style>.map {width: 300px; height: 300px; border:10px solid black;}</style>
-  <div class='smallworld map'></div>
+  <style>.map {    
+    width: 300px;
+    height: 150px;
+    margin: 0 auto;
+    position: relative;
+  }</style>
+  <div class='smallworld map' data-lat='37.757719928168605' data-long='-122.43760000000003'></div>
+  <div class='smallworld map' data-lat='47.1231' data-long='100.312312'></div>
   ",
     );
   }
