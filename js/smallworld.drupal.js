@@ -46,17 +46,21 @@
     	async: false,
     	dataType: 'json',
     	success: function(data) {
-    		smallworld_geojson = data;
+    	  smallworld_geojson = data;
     	}
       });
 
       $('.smallworld').each(function() {
-        var lattitude = $(this).attr("data-lat");
+        var latitude = $(this).attr("data-lat");
         var longitude = $(this).attr("data-long");
-        alert(longitude); alert(lattitude);
         $(this).smallworld({
           geojson: smallworld_geojson,
-          marker: [lattitude, longitude],
+          marker: [latitude, longitude],
+          waterColor: Drupal.settings.smallworld_drupal.smallworld_water,
+          landColor: Drupal.settings.smallworld_drupal.smallworld_land,
+	  markerSize: Drupal.settings.smallworld_drupal.smallworld_marker_size,
+          markerColor: Drupal.settings.smallworld_drupal.smallworld_marker_color,
+          center: [Drupal.settings.smallworld_drupal.smallworld_center_lat, Drupal.settings.smallworld_drupal.smallworld_center_long],
         });
       });
  

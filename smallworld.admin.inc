@@ -1,14 +1,7 @@
 <?php
 
 /**
-  * Form definition for the open debate engine admin configuration form.
-
-
-  $('.map').smallworld({
-        geojson: data,
-  	marker: true,
-  	markerColor: '#fa29df'
-  });
+  * Form definition for the smallworld admin configuration form.
   *
 */
 
@@ -20,18 +13,13 @@ function smallworld_admin_form($form, &$form_state) {
   $smallworld_land = variable_get("smallworld_land", "#fff");
   $smallworld_marker_color = variable_get("smallworld_marker_color", "#333");
   $smallworld_marker_size = variable_get("smallworld_marker_size", 5);
+  $smallworld_center_lat = variable_get("smallworld_center_lat", 0);
+  $smallworld_center_long = variable_get("smallworld_center_long", 0);
 
   if (($library = libraries_load("smallworld.js")) && !empty($library['loaded'])) {
     $form['smallworld_config_demo'] = array(
         '#markup'=> "
-  <style>.map {    
-    width: 300px;
-    height: 150px;
-    margin: 0 auto;
-    position: relative;
-  }</style>
-  <div class='smallworld map' data-lat='37.757719928168605' data-long='-122.43760000000003'></div>
-  <div class='smallworld map' data-lat='47.1231' data-long='100.312312'></div>
+  <div class='smallworld map' style='width: 300px; height: 150px' data-lat='37.757719928168605' data-long='-122.43760000000003'></div>
   ",
     );
   }
@@ -80,6 +68,26 @@ function smallworld_admin_form($form, &$form_state) {
     '#description'=> t('Size of the marker (1-10).'),
     '#size' => 60,
     '#maxlength' => 6,
+    '#required' => FALSE,
+  );
+
+  $form['smallworld_center_long'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Map Centering: Longitude'),
+    '#default_value' => $smallworld_center_long,
+    '#description'=> t('Where to center the map, Longitude.'),
+    '#size' => 60,
+    '#maxlength' => 4,
+    '#required' => FALSE,
+  );
+
+  $form['smallworld_center_lat'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Map Centering: Latitude'),
+    '#default_value' => $smallworld_center_lat,
+    '#description'=> t('Where to center the map, Latitude.'),
+    '#size' => 60,
+    '#maxlength' => 4,
     '#required' => FALSE,
   );
 

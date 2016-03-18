@@ -6,4 +6,5 @@ version = 7.x-1.0
 project = smallworld
 configure = admin/config/media/smallworld
 
+files[] = smallworld.filters.php
 dependencies[] = libraries

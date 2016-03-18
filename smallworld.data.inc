@@ -6,6 +6,8 @@
  * Lat / Long data from: https://developers.google.com/public-data/docs/canonical/countries_csv
  */
 
+global $smallworld_lookup; 
+
 $smallworld_lookup = array (
   'AD' => 
   array (

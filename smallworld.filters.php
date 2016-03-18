@@ -23,7 +23,7 @@ function smallworld_filter_info() {
  */
 function smallworld_filter_embed_tips($filter, $format, $long) {
 
-  return t('[smallworld=<COUNTRY CODE] - Embed a 300x150 map into the page with a marker for a given country.');
+  return t('[smallworld=<COUNTRY CODE>] - Embed a 300x150 map into the page with a marker for a given country.');
 
 } // node_embed_filter_node_embed_tips
 
@@ -32,7 +32,7 @@ function smallworld_filter_embed_tips($filter, $format, $long) {
  */
 function smallworld_embed_process($text, $filter, $format, $langcode, $cache, $cache_id) {
 
-  return preg_replace_callback('/\[embed=(\\d+)\]/si','_smallworld_embed_replacements', $text);
+  return preg_replace_callback('/\[smallworld=([a-zA-Z]+)\]/si','_smallworld_embed_replacements', $text);
 
 } // smallworld_embed_process
 
@@ -57,27 +57,13 @@ function smallworld_embed_prepare($text, $filter, $format, $langcode, $cache, $c
 
 function _smallworld_embed_replacements($matches) {
 
-  $node = node_load($matches[1]);
+  include_once(drupal_get_path("module","smallworld")."/smallworld.data.inc");
 
-  if ($node == FALSE || !node_access('view', $node) || !$node->status
-  	 || !(in_array($node->type, array("argument","evidence","news","citation","position")))) {
-
-    return "<p class='error'>ERROR: Invalid embed shortcode [{$matches[1]}] -- ".$node->type."</p>";
-
-  } // if
-  else {
-
-    $node->node_embed_parameters = array();
-
-    if (!isset($node->node_embed_parameters['view_mode'])) {
-      $node->node_embed_parameters['view_mode'] = 'node_embed';
-    } // if
-    $view = node_view($node, 'opendebate_embed', NULL);
-    $render = drupal_render($view);
-    $render = "<div class='opendebate-embed-container'>".$render."</div>";
-    return $render;
-
-  } // else
+  global $smallworld_lookup; 
+ 
+  return "<div class='smallworld map' data-lat='".$smallworld_lookup[$matches[1]]["lat"]."' data-long='".$smallworld_lookup[$matches[1]]["long"]."'></div>";
+  
+  print_r($smallworld_lookup[$matches[1]]);
 
 } // _embed_replacements
 

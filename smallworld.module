@@ -6,6 +6,8 @@
 * <div class='smallworld' data-country='' data-lat='' data-long=''></div>
 */
 
+include_once("smallworld.filters.php");
+
 /**
 * Implement hook_menu().
 */
@@ -17,10 +19,13 @@ function smallworld_init() {
     "smallworld_land" => check_plain(variable_get("smallworld_land", "#fff")),
     "smallworld_marker_color" => check_plain(variable_get("smallworld_marker_color", "#333")),
     "smallworld_marker_size" => check_plain(variable_get("smallworld_marker_size", 5)),
+    "smallworld_center_long" => check_plain(variable_get("smallworld_center_long", 0)),
+    "smallworld_center_lat" => check_plain(variable_get("smallworld_center_lat", 0)),
   );
 
   drupal_add_js(array('smallworld_drupal' => $smallworld_settings),'setting');
   drupal_add_js(drupal_get_path('module', "smallworld")."/js/smallworld.drupal.js");
+  drupal_add_css(drupal_get_path('module','smallworld')."/css/smallworld.css");
 
 }
 
