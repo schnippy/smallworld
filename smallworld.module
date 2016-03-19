@@ -4,6 +4,11 @@
 * @file
 * A light-weight plugin for Smallworld.js
 * <div class='smallworld' data-country='' data-lat='' data-long=''></div>
+*
+* TODO:
+*
+*  - add functionality for recognizing full country names, ex [smallworld=Canada]
+*  - add support for jquery color picker module https://www.drupal.org/project/jquery_colorpicker
 */
 
 include_once("smallworld.filters.php");
@@ -80,7 +85,7 @@ function smallworld_libraries_info() {
 }
 
 /**
- * Implements smallworld_output().
+ * Outputs smallworld div with lookup for country code 
  */
 function smallworld_output($country = "US") { 
 
@@ -90,6 +95,17 @@ function smallworld_output($country = "US") {
 
   global $smallworld_lookup;
 
-  return "<div class='smallworld map' data-lat='".$smallworld_lookup[$country]["lat"]."' data-long='".$smallworld_lookup[$country]["long"]."'></div>";
+  return _smallworld_output_div($smallworld_lookup[$country]["lat"], $smallworld_lookup[$country]["long"]);
 
-} // 
+} // end smallworld_output
+
+/**
+ * Shared output of smallworld_div 
+ */
+function _smallworld_output_div($lat ="45", $long="-110") { 
+
+  $smallworld_map_class = check_plain(variable_get("smallworld_map_class", "map"));
+
+  return "<div class='smallworld $smallworld_map_class' data-lat='".$lat."' data-long='".$long."'></div>";
+
+} // end _smallworld_output_div

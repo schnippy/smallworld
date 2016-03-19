@@ -9,6 +9,7 @@ function smallworld_admin_form($form, &$form_state) {
 
   $form = array();
 
+  $smallworld_map_class = variable_get("smallword_map_class", "map");
   $smallworld_water = variable_get("smallworld_water", "#b3d1ff");
   $smallworld_land = variable_get("smallworld_land", "#fff");
   $smallworld_marker_color = variable_get("smallworld_marker_color", "#333");
@@ -31,22 +32,35 @@ function smallworld_admin_form($form, &$form_state) {
     drupal_set_message(t("smallworld.js library is not loaded: @error.", array("@error" => $error_message)), "error");
   }
 
+  $form['smallworld_map_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('CSS Map Class'),
+    '#default_value' => $smallworld_map_class,
+    '#description'=> t('Class to use for outputting the smallworld.js map.'),
+    '#size' => 35,
+    '#maxlength' => 35,
+    '#required' => TRUE,
+  );
+
+  $form['smallworld_color_left'] = array('#markup' => '<div style="width:45%; float: left;">');
+
   $form['smallworld_water'] = array(
     '#type' => 'textfield',
     '#title' => t('Water Color'),
     '#default_value' => $smallworld_water,
-    '#description'=> t('Color to use for the land in Smallworld.'),
-    '#size' => 60,
+    '#description'=> t('HTML color code to use for the water.'),
+    '#size' => 15,
     '#maxlength' => 15,
     '#required' => FALSE,
   );
+
 
   $form['smallworld_land'] = array(
     '#type' => 'textfield',
     '#title' => t('Land Color'),
     '#default_value' => $smallworld_land,
-    '#description'=> t('Color to use for the land in Smallworld.'),
-    '#size' => 60,
+    '#description'=> t('HTML color code to use for the land.'),
+    '#size' => 15,
     '#maxlength' => 15,
     '#required' => FALSE,
   );
@@ -55,8 +69,8 @@ function smallworld_admin_form($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => t('Marker Color'),
     '#default_value' => $smallworld_marker_color,
-    '#description'=> t('Color to use for the land in Smallworld.'),
-    '#size' => 60,
+    '#description'=> t('HTML color code to use for the marker.'),
+    '#size' => 15,
     '#maxlength' => 15,
     '#required' => FALSE,
   );
@@ -66,8 +80,8 @@ function smallworld_admin_form($form, &$form_state) {
     '#title' => t('Size of Marker'),
     '#default_value' => $smallworld_marker_size,
     '#description'=> t('Size of the marker (1-10).'),
-    '#size' => 60,
-    '#maxlength' => 6,
+    '#size' => 5,
+    '#maxlength' => 2,
     '#required' => FALSE,
   );
 
@@ -76,7 +90,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#title' => t('Map Centering: Longitude'),
     '#default_value' => $smallworld_center_long,
     '#description'=> t('Where to center the map, Longitude.'),
-    '#size' => 60,
+    '#size' => 10,
     '#maxlength' => 4,
     '#required' => FALSE,
   );
@@ -86,7 +100,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#title' => t('Map Centering: Latitude'),
     '#default_value' => $smallworld_center_lat,
     '#description'=> t('Where to center the map, Latitude.'),
-    '#size' => 60,
+    '#size' => 10,
     '#maxlength' => 4,
     '#required' => FALSE,
   );

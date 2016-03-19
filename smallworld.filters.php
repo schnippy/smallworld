@@ -60,10 +60,7 @@ function _smallworld_embed_replacements($matches) {
   include_once(drupal_get_path("module","smallworld")."/smallworld.data.inc");
 
   global $smallworld_lookup; 
- 
-  return "<div class='smallworld map' data-lat='".$smallworld_lookup[$matches[1]]["lat"]."' data-long='".$smallworld_lookup[$matches[1]]["long"]."'></div>";
+
+  return _smallworld_output_div($smallworld_lookup[$matches[1]]["lat"], $smallworld_lookup[$matches[1]]["long"]);
   
-  print_r($smallworld_lookup[$matches[1]]);
-
 } // _embed_replacements
-
