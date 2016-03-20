@@ -14,7 +14,9 @@ Where the Drupal 7 module comes in is by offering a handy wrapper for the librar
 2. Download and install the Smallword module by cloning this repository.
 3. Download and install the Smallword.js library from the [plugin website](http://mikefowler.me/smallworld.js/). The smallworld.js file should be able to be found in the path "libraries/smallworld.js/src/smallworld.js"
 4. Go to admin/configure/media/smallworld to set the colors for your smallworld maps and define your map class.
-5. **Add CSS classes for your map div to your theme's CSS**. You must define the size of your map div for it to display, otherwise the library won't know what size canvas to render. On the settings page, the first and only required option is 'Map Class' (which defaults to just 'map'), you need to define in your site CSS the height and width of this div. For example, if I define the "Map Class" as 'world_map' than I would need to have something like the following CSS:
+5. **Add CSS classes for your map div to your theme's CSS**. You must define the size of your map div for it to display, otherwise the library won't know what size canvas to render. On the settings page, the first and only required option is 'Map Class' (which defaults to just 'map'), you need to define in your site CSS the height and width of this div. 
+
+For example, if I define the "Map Class" as 'world_map' than I would need to have something like the following CSS:
 
 `.world_map {
   height: 150px;
