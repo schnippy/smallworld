@@ -6,7 +6,7 @@ The Smallworld module is a Drupal 7 module that integrates the handy [Smallworld
   	geojson: data
   });``
 
-Where the Drupal 7 module comes in is by offering a handy wrapper for the library and simplifying the process of adding a map for non-technical editors. Instead of having to enable inline jquery or lookup
+Where the Drupal 7 module comes in is by offering a handy wrapper for the library and simplifying the process of adding a map for non-technical editors. Instead of having to enable inline jquery or lookup the lat longs for each country, content administrators can use a simple shortcode of "[smallworld=<country_code>]" to place a smallworld map into their posts.
 
 ##Installation##
 
