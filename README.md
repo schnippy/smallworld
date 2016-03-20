@@ -56,3 +56,5 @@ Taking each part of this one by one, the first class, 'smallworld', is what the 
 The second class is critical to define the size of the canvas the library is rendering, the map will not display without this. We have left this out of the module CSS to give you more control over it, you define the name of this in the Smallworld settings file and you can add the CSS code to your theme.
 
 Finally, the two data elements are for your latitude and longitude data. In the first two methods, these are provided by the module but if you want to add your own data point you can do that here. If these are missing, it will just display a world map with no marker.
+
+Credit to [Ashoka.org](http://www.ashoka.org) for supporting development of this project.
