@@ -9,7 +9,7 @@ function smallworld_admin_form($form, &$form_state) {
 
   $form = array();
 
-  $smallworld_map_class = variable_get("smallword_map_class", "map");
+  $smallworld_map_class = variable_get("smallworld_map_class", "map");
   $smallworld_water = variable_get("smallworld_water", "#b3d1ff");
   $smallworld_land = variable_get("smallworld_land", "#fff");
   $smallworld_marker_color = variable_get("smallworld_marker_color", "#333");
@@ -42,8 +42,6 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => TRUE,
   );
 
-  $form['smallworld_color_left'] = array('#markup' => '<div style="width:45%; float: left;">');
-
   $form['smallworld_water'] = array(
     '#type' => 'textfield',
     '#title' => t('Water Color'),
@@ -53,7 +51,6 @@ function smallworld_admin_form($form, &$form_state) {
     '#maxlength' => 15,
     '#required' => FALSE,
   );
-
 
   $form['smallworld_land'] = array(
     '#type' => 'textfield',
