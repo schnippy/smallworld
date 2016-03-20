@@ -35,3 +35,23 @@ This module comes with an input filter that you can enable that will let content
   `[smallworld=<two letter country code>], ex: [smallworld=US]`
 
 which will output a smallworld map with a marker on the capital of the U.S. The included data file, smallworld.data.inc, includes a lookup file with lat / long information for every country to make this possible.
+
+After installing the module, the "Embed Smallworld map" filter option will be made available, navigate to the settings for text formats (admin/config/content/formats) and add it to whichever text formats you want to have this access.
+
+**Output in Template**
+
+If you want to output a map in your templates, you can directly call the smallworld_output function in your code by passing it a country code. For example,
+
+`<?php print smallworld_output("CA"); ?>`
+
+**Manual Output**
+
+Finally, you can manually add the code to generate a smallworld map without using the function or output filter by just adding the following HTML to your code:
+
+`<div class='smallworld <your map class>' data-lat='<your latitude>' data-long='<your longitude>'></div>`
+
+Taking each part of this one by one, the first class, 'smallworld', is what the jquery function uses to identify divs that it needs to replace with maps. This allows you to embed as many smallworld maps as you like on a page, as the function will fire on every one with this class.
+
+The second class is critical to define the size of the canvas the library is rendering, the map will not display without this. We have left this out of the module CSS to give you more control over it, you define the name of this in the Smallworld settings file and you can add the CSS code to your theme.
+
+Finally, the two data elements are for your latitude and longitude data. In the first two methods, these are provided by the module but if you want to add your own data point you can do that here. If these are missing, it will just display a world map with no marker.
