@@ -18,19 +18,24 @@ include_once("smallworld.filters.php");
 */
 function smallworld_init() {
 
-  libraries_load("smallworld.js");
-  $smallworld_settings = array(
-    "smallworld_water" => check_plain(variable_get("smallworld_water", "#b3d1ff")),
-    "smallworld_land" => check_plain(variable_get("smallworld_land", "#fff")),
-    "smallworld_marker_color" => check_plain(variable_get("smallworld_marker_color", "#333")),
-    "smallworld_marker_size" => check_plain(variable_get("smallworld_marker_size", 5)),
-    "smallworld_center_long" => check_plain(variable_get("smallworld_center_long", 0)),
-    "smallworld_center_lat" => check_plain(variable_get("smallworld_center_lat", 0)),
-  );
+  $node = menu_get_object();
+  $smallworld_types = variable_get("smallworld_content_types", array());
+  if ((!empty($node) && $smallworld_types[$node->type]) || (current_path() == "admin/config/media/smallworld")) { 
 
-  drupal_add_js(array('smallworld_drupal' => $smallworld_settings),'setting');
-  drupal_add_js(drupal_get_path('module', "smallworld")."/js/smallworld.drupal.js");
-  drupal_add_css(drupal_get_path('module','smallworld')."/css/smallworld.css");
+    libraries_load("smallworld.js");
+    $smallworld_settings = array(
+      "smallworld_water" => check_plain(variable_get("smallworld_water", "#b3d1ff")),
+      "smallworld_land" => check_plain(variable_get("smallworld_land", "#fff")),
+      "smallworld_marker_color" => check_plain(variable_get("smallworld_marker_color", "#333")),
+      "smallworld_marker_size" => check_plain(variable_get("smallworld_marker_size", 5)),
+      "smallworld_center_long" => check_plain(variable_get("smallworld_center_long", 0)),
+      "smallworld_center_lat" => check_plain(variable_get("smallworld_center_lat", 0)),
+    );
+
+    drupal_add_js(array('smallworld_drupal' => $smallworld_settings),'setting');
+    drupal_add_js(drupal_get_path('module', "smallworld")."/js/smallworld.drupal.js");
+    drupal_add_css(drupal_get_path('module','smallworld')."/css/smallworld.css");
+  }
 
 }
 

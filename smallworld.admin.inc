@@ -32,7 +32,14 @@ function smallworld_admin_form($form, &$form_state) {
     drupal_set_message(t("smallworld.js library is not loaded: @error.", array("@error" => $error_message)), "error");
   }
 
-  $form['smallworld_map_class'] = array(
+  $form['smallworld_styles'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Smallworld Styles'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+
+  $form['smallworld_styles']['smallworld_map_class'] = array(
     '#type' => 'textfield',
     '#title' => t('CSS Map Class'),
     '#default_value' => $smallworld_map_class,
@@ -42,7 +49,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => TRUE,
   );
 
-  $form['smallworld_water'] = array(
+  $form['smallworld_styles']['smallworld_water'] = array(
     '#type' => 'textfield',
     '#title' => t('Water Color'),
     '#default_value' => $smallworld_water,
@@ -52,7 +59,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
-  $form['smallworld_land'] = array(
+  $form['smallworld_styles']['smallworld_land'] = array(
     '#type' => 'textfield',
     '#title' => t('Land Color'),
     '#default_value' => $smallworld_land,
@@ -62,7 +69,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
-  $form['smallworld_marker_color'] = array(
+  $form['smallworld_styles']['smallworld_marker_color'] = array(
     '#type' => 'textfield',
     '#title' => t('Marker Color'),
     '#default_value' => $smallworld_marker_color,
@@ -72,7 +79,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
-  $form['smallworld_marker_size'] = array(
+  $form['smallworld_styles']['smallworld_marker_size'] = array(
     '#type' => 'textfield',
     '#title' => t('Size of Marker'),
     '#default_value' => $smallworld_marker_size,
@@ -82,7 +89,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
-  $form['smallworld_center_long'] = array(
+  $form['smallworld_styles']['smallworld_center_long'] = array(
     '#type' => 'textfield',
     '#title' => t('Map Centering: Longitude'),
     '#default_value' => $smallworld_center_long,
@@ -92,7 +99,7 @@ function smallworld_admin_form($form, &$form_state) {
     '#required' => FALSE,
   );
 
-  $form['smallworld_center_lat'] = array(
+  $form['smallworld_styles']['smallworld_center_lat'] = array(
     '#type' => 'textfield',
     '#title' => t('Map Centering: Latitude'),
     '#default_value' => $smallworld_center_lat,
@@ -100,6 +107,29 @@ function smallworld_admin_form($form, &$form_state) {
     '#size' => 10,
     '#maxlength' => 4,
     '#required' => FALSE,
+  );
+
+  $types = node_type_get_types();
+  $content_types = array();
+  foreach ($types as $type) {
+    $content_types[$type->type] = t($type->name);
+  }
+
+  $form['smallworld_config'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Smallworld Configuration'),
+    '#collapsible' => TRUE, // Added
+    '#collapsed' => FALSE,  // Added
+  );
+
+  $form['smallworld_config']['info'] = array(
+    '#markup'=> "<p>Select the content types that this will be output on to prevent the smallworld library and assets from being loaded on every page:</p>",
+  );
+  
+  $form['smallworld_config']['smallworld_content_types'] = array(
+    '#type' => 'checkboxes',
+    '#options' => $content_types,
+    '#default_value' => variable_get("smallworld_content_types", array()), 
   );
 
   return system_settings_form($form);
